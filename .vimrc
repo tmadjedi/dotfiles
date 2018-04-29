@@ -31,3 +31,5 @@ filetype plugin indent on
 " use solarized colors
 set background=dark
 colorscheme solarized
+
+let g:ctrlp_custom_ignore = { 'dir': 'node_modules' }
