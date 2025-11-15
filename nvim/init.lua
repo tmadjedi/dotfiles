@@ -31,18 +31,17 @@ require("lazy").setup({
   {
     "lewis6991/gitsigns.nvim"
   },
+  { 'echasnovski/mini.completion', version = false },
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {}
-  }
+  },
 })
 
 vim.cmd([[colorscheme tokyonight-night]])
 
-lspconfig = require("lspconfig")
-lspconfig.pylsp.setup({})
 
 require("lualine").setup({
   options = { 
@@ -52,6 +51,8 @@ require("lualine").setup({
     section_separators = { left = '', right = '' }
   }
 })
+
+require("mini.completion").setup()
 
 require("gitsigns").setup({
   signs = {
@@ -65,6 +66,10 @@ require("gitsigns").setup({
   signcolumn = true
 })
 
+lspconfig = require("lspconfig")
+lspconfig.pylsp.setup({})
+lspconfig.clangd.setup({})
+
 vim.wo.number = true
 -- vim.opt.signcolumn = "number"
 
@@ -77,6 +82,8 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.bo.softtabstop = 4
+
+vim.api.nvim_set_keymap('i', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {})
 
 -- telescope mappings
 local builtin = require('telescope.builtin')
